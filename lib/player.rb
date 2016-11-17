@@ -12,7 +12,7 @@ class Player
     @lands = []
     @currentLand = nil
     @isLucky = false
-    @lucky_round_left = 0;
+    @lucky_round_left = 0
     @isInPrison = false
   end
 

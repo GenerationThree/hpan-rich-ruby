@@ -48,10 +48,12 @@ describe 'roll to others land test' do
   end
 
   it 'should no need to pay on other player land when lucky' do
-    @player.isLucky = true
-    @game_map.stub(:move) { @land1 }
+    @player.become_lucky
 
+    @game_map.stub(:move) { @land1 }
     @player.execute(@roll_command)
+
+    puts @player.isLucky
 
     expect(@player.money).to be 1000
     expect(@player2.money).to be 1000

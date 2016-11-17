@@ -16,6 +16,10 @@ class RollCommand
       return 'WAIT_FOR_RESPONSE'
     end
 
+    if player.currentLand.is_magic_house == true
+      return 'END_TURN'
+    end
+
     if player.currentLand.owner == nil || player.currentLand.owner == player
       return 'WAIT_FOR_RESPONSE'
     end
