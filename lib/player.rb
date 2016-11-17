@@ -1,6 +1,6 @@
 class Player
-  attr_reader :status, :money, :tools, :lands, :currentLand
-  attr_writer :status, :money
+  attr_reader :status, :money, :tools, :lands, :currentLand, :isLucky, :isInPrison
+  attr_writer :status, :money, :isLucky, :isInPrison
 
   def initialize (id, init_money = 1000)
     @id = id
@@ -9,6 +9,8 @@ class Player
     @tools = []
     @lands = []
     @currentLand = nil
+    @isLucky = false
+    @isInPrison = false
   end
 
   def execute (command)
@@ -35,15 +37,33 @@ class Player
     if canPay?(@currentLand.price)
       @currentLand.owner = self
       @lands.push(@currentLand)
-      @money += @currentLand.price
+      self.earn(@currentLand.price)
     end
   end
 
   def updateCurrentLand
     if @currentLand.level != 3 && self.money >= @currentLand.price
       @currentLand.levelUp()
-      @money -= @currentLand.price
+      self.pay(@currentLand.price)
     end
+  end
+
+  def payPassingFee
+    passingFee = @currentLand.getPassingFee()
+    landOwner = @currentLand.owner
+
+    if !@isLucky && !landOwner.isInPrison
+      self.pay(passingFee)
+      landOwner.earn(passingFee)
+    end
+  end
+
+  def pay (price)
+    self.money -= price
+  end
+
+  def earn (price)
+    self.money += price
   end
 
   def canPay? (price)

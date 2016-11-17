@@ -7,7 +7,7 @@ require_relative '../lib/not_update_land_response'
 require_relative '../lib/update_land_response'
 require_relative '../lib/buy_land_response'
 
-describe 'roll to empty land test' do
+describe 'roll to own land test' do
   before(:each) do
     @player = Player.new 1
     @land0 = Land.new 0

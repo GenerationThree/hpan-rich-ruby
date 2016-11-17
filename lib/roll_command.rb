@@ -10,5 +10,10 @@ class RollCommand
       return 'WAIT_FOR_RESPONSE'
     end
 
+    if player.currentLand.owner != player
+      player.payPassingFee()
+      return 'END_TURN'
+    end
+
   end
 end

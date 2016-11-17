@@ -11,4 +11,9 @@ class Land
   def levelUp
     @level += 1
   end
+
+  def getPassingFee
+    @price / 2 * (2**@level)
+  end
+
 end
