@@ -34,6 +34,4 @@ describe 'sell land test' do
     expect(@player.lands.length).to eq 1
     expect(@player.status).to eq 'WAIT_FOR_COMMAND'
   end
-
-
 end

@@ -1,6 +1,6 @@
 class Player
   attr_reader :status, :money, :tools, :lands, :currentLand
-  attr_writer :status
+  attr_writer :status, :money
 
   def initialize (id, init_money = 1000)
     @id = id
@@ -36,6 +36,13 @@ class Player
       @currentLand.owner = self
       @lands.push(@currentLand)
       @money += @currentLand.price
+    end
+  end
+
+  def updateCurrentLand
+    if @currentLand.level != 3 && self.money >= @currentLand.price
+      @currentLand.levelUp()
+      @money -= @currentLand.price
     end
   end
 

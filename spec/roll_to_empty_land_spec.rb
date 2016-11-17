@@ -27,6 +27,8 @@ describe 'roll to empty land test' do
   end
 
   it 'should able to choose not to buy on empty land' do
+    @game_map.stub(:move) { @land1 }
+
     @player.execute(@roll_command)
 
     @player.respond(@not_buy_land_response)
