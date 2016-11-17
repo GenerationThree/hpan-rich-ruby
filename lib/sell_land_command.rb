@@ -6,7 +6,7 @@ class SellLandCommand < Command
   end
 
   def execute (player)
-    player.sellLand(@landId)
+    player.sell_land(@landId)
     return 'WAIT_FOR_COMMAND'
   end
 end

@@ -6,7 +6,7 @@ class SellToolCommand < Command
   end
 
   def execute (player)
-    player.sellTool(@toolId)
+    player.sell_tool(@toolId)
     return 'WAIT_FOR_COMMAND'
   end
 end
