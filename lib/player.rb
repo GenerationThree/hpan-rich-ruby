@@ -1,6 +1,6 @@
 class Player
-  attr_reader :status, :money, :points, :tools, :lands, :currentLand, :isLucky, :lucky_round_left, :isInPrison, :bye_round_left
-  attr_writer :status, :money, :points, :isLucky, :isInPrison, :bye_round_left
+  attr_reader :status, :money, :points, :tools, :lands, :currentLand, :isLucky, :lucky_round_left, :isInPrison, :is_in_hospital, :bye_round_left
+  attr_writer :status, :money, :points, :isLucky, :isInPrison, :is_in_hospital, :bye_round_left
 
   def initialize (id, init_money = 1000)
     @position = id
@@ -14,6 +14,7 @@ class Player
     @isLucky = false
     @lucky_round_left = 0
     @isInPrison = false
+    @is_in_hospital = false
     @bye_round_left = 0
   end
 
@@ -137,5 +138,10 @@ class Player
   def imprisoned
     @isInPrison = true
     @bye_round_left = 2
+  end
+
+  def hospitalised
+    @is_in_hospital = true
+    @bye_round_left = 3
   end
 end
