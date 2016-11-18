@@ -62,9 +62,9 @@ describe 'roll to tool house test' do
   end
 
   it 'should not able to buy tool without enough points' do
-    10.times {
+    10.times do
       @player.tools.push(1)
-    }
+    end
     @game_map.stub(:move) { @tool_house }
 
     @player.execute(@roll_command)

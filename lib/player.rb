@@ -1,9 +1,9 @@
 class Player
-  attr_reader :status, :money, :points, :tools, :lands, :currentLand, :isLucky, :lucky_round_left, :isInPrison
-  attr_writer :status, :money, :points, :isLucky, :isInPrison
+  attr_reader :status, :money, :points, :tools, :lands, :currentLand, :isLucky, :lucky_round_left, :isInPrison, :bye_round_left
+  attr_writer :status, :money, :points, :isLucky, :isInPrison, :bye_round_left
 
   def initialize (id, init_money = 1000)
-    @id = id
+    @position = id
     @status = 'WAIT_FOR_COMMAND'
     @money = init_money
     @points = 0
@@ -14,6 +14,7 @@ class Player
     @isLucky = false
     @lucky_round_left = 0
     @isInPrison = false
+    @bye_round_left = 0
   end
 
   def execute (command)
@@ -50,7 +51,7 @@ class Player
   end
 
   def sell_land (landId)
-    @lands.delete_if { |land| land.id == landId }
+    @lands.delete_if { |land| land.position == landId }
   end
 
   def move_to (land)
@@ -131,5 +132,10 @@ class Player
   def become_lucky
     @isLucky = true
     @lucky_round_left = 5
+  end
+
+  def imprisoned
+    @isInPrison = true
+    @bye_round_left = 2
   end
 end
