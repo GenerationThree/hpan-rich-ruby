@@ -1,6 +1,6 @@
 class Land
-  attr_reader :position, :owner, :price, :level, :is_gift_house, :is_magic_house, :is_prison, :is_hospital, :is_mine, :mine_points, :is_blocked, :is_bombed
-  attr_writer :owner, :level, :is_gift_house, :is_magic_house, :is_prison, :is_hospital, :is_mine, :mine_points, :is_blocked, :is_bombed
+  attr_reader :position, :owner, :price, :level, :players, :is_gift_house, :is_magic_house, :is_prison, :is_hospital, :is_mine, :mine_points, :is_blocked, :is_bombed
+  attr_writer :owner, :level, :players, :is_gift_house, :is_magic_house, :is_prison, :is_hospital, :is_mine, :mine_points, :is_blocked, :is_bombed
 
   def initialize (position, price = 500)
     @position = position
@@ -12,6 +12,7 @@ class Land
     @is_hospital = false
     @is_mine = false
     @mine_points = 0
+    @players = []
 
     @is_blocked = false
     @is_bombed = false
@@ -23,6 +24,10 @@ class Land
 
   def getPassingFee
     @price / 2 * (2**@level)
+  end
+
+  def has_player_on?
+    return @players.length != 0
   end
 
 end

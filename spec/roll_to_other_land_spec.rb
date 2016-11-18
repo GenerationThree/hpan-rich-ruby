@@ -53,8 +53,6 @@ describe 'roll to others land test' do
     @game_map.stub(:move) { @land1 }
     @player.execute(@roll_command)
 
-    puts @player.isLucky
-
     expect(@player.money).to be 1000
     expect(@player2.money).to be 1000
     expect(@player.status).to eq 'END_TURN'

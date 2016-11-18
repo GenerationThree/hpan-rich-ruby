@@ -26,12 +26,36 @@ class Player
     @status = response.respond(self)
   end
 
+
+  def set_tool (tool_id, land, game_map)
+    lands_num = game_map.lands.length
+    current_position = currentLand.position
+
+    if tool_id == 1 && (land.position - current_position < 10 || (lands_num - (current_position - land.position)) < 10)
+      land.is_blocked = true
+    end
+
+    if tool_id == 2
+
+      for i in 1..10
+        next_land = game_map.lands[(current_position + i) % lands_num]
+        next_land.is_bombed = false
+        next_land.is_blocked = false
+      end
+    end
+
+    if tool_id == 3 && (land.position - current_position < 10 || (lands_num - (current_position - land.position)) < 10)
+      land.is_bombed = true
+    end
+  end
+
+
   def buy_tool (tool_id)
     if tool_id == 1 || tool_id == 3
       tool_points = 50
     end
     if tool_id == 2
-      tool_points = 50
+      tool_points = 30
     end
 
     if self.can_pay_points?(tool_points) && !self.is_tool_bag_full?()
@@ -48,7 +72,6 @@ class Player
     if tool_id == 2
       self.earn_points(30)
     end
-
   end
 
   def sell_land (landId)
@@ -62,6 +85,11 @@ class Player
       @isLucky = false
     end
 
+    if @currentLand != nil
+      @currentLand.players.delete(self)
+    end
+
+    land.players.push(self)
     @currentLand = land
   end
 
@@ -143,5 +171,9 @@ class Player
   def hospitalised
     @is_in_hospital = true
     @bye_round_left = 3
+  end
+
+  def roll
+
   end
 end

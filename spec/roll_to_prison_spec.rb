@@ -19,9 +19,7 @@ describe 'roll to prison test' do
     @player.move_to(@start)
 
     @roll_command = RollCommand.new @game_map
-    @not_buy_tool_response = NotBuyToolResponse.new
-    @buy_tool_one_response = BuyToolResponse.new 1
-
+    @player.stub(:roll) { 1 }
   end
 
   it 'should end turn when roll to prison' do
